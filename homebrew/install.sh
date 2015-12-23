@@ -23,5 +23,6 @@ fi
 
 # Install homebrew packages
 brew install grc coreutils spark
+brew install michaeldfallen/formula/git-radar
 
 exit 0
