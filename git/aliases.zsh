@@ -16,7 +16,7 @@ alias gb='git branch'
 
 alias gs='git status' # upgrade your git if -sb breaks for you. it's fun.
 alias gp='git pull'
-alias gps="git submodule foreach git pull"
+alias gps="git submodule foreach git pull origin master"
 alias gc='git commit -m'
 alias gl="git log"
 
