@@ -8,3 +8,5 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+
+alias ia="open $1 -a /Applications/iA\ Writer.app"

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#
+# Quick search in a directory for a string ($1).
+# usage: ag-replace.sh [search] [replace]
+# caveats: will choke if either arguments contain a forward slash
+# notes: will back up changed files to *.bak files
+#
+
+ag -l ( | xargs perl -pi.bak -e "s/(/[/g"]))
