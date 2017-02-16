@@ -9,6 +9,7 @@ alias pull='git pull origin HEAD'
 alias gd='git diff'
 alias gout='git checkout'
 alias gc='git commit --m '
+alias ga='git add '
 alias gl="git log"
 # alias gps="git submodule foreach git pull origin master"
 

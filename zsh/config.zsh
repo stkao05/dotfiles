@@ -46,3 +46,9 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
+
+
+# enable VI edit mode. this allows you to press <ESC> to switch to NORMAL mode.
+bindkey -v
+# by default, there is a 0.4 second delay after you hit the <ESC> key to enter VI mode
+export KEYTIMEOUT=1

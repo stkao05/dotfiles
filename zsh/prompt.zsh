@@ -59,3 +59,16 @@ precmd() {
   title "zsh" "%m" "%55<...<%~"
   set_prompt
 }
+
+
+# Right side prompt
+
+# display vi mode activation status. ref: https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
