@@ -23,7 +23,7 @@ bind C-a send-prefix
 
 # split window shortcut
 bind v split-window -h
-bind n split-window -v
+bind s split-window -v
 
 # Quick window selection
 bind -r C-h select-window -t :-
@@ -102,7 +102,6 @@ set -g pane-active-border-fg brightred
 
 ## Status bar design
 # status line
-set -g status-utf8 on
 set -g status-justify left
 set -g status-bg default
 set -g status-fg colour12
