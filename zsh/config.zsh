@@ -47,6 +47,8 @@ bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 
+bindkey "^R" history-incremental-pattern-search-backward
+
 
 # enable VI edit mode. this allows you to press <ESC> to switch to NORMAL mode.
 bindkey -v

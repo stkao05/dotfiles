@@ -1,0 +1,11 @@
+#!/bin/sh
+echo $1
+
+if [ "$1" = "on" ]; then
+    sed -i -e 's/STATIC_USE_CDN = .*/STATIC_USE_CDN = True/' /Users/stevenkao/todoist/Todoist/todoist/config_custom.py
+else
+    sed -i -e 's/STATIC_USE_CDN = .*/STATIC_USE_CDN = False/' /Users/stevenkao/todoist/Todoist/todoist/config_custom.py
+fi
+
+rm -rf /Users/stevenkao/todoist/Todoist/runtime/generated
+mkdir /Users/stevenkao/todoist/Todoist/runtime/generated
