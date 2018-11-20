@@ -1,4 +1,0 @@
-#!/bin/sh
-
-rm -rf /Users/stevenkao/todoist/Todoist/runtime/generated
-mkdir /Users/stevenkao/todoist/Todoist/runtime/generated

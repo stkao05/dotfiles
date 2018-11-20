@@ -1,0 +1,65 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# list all the staged file, only include todoist web app change for now
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$")
+ESLINT="$(git rev-parse --show-toplevel)/node_modules/.bin/eslint"
+
+if [[ "$STAGED_FILES" = "" ]]; then
+  exit 0
+fi
+
+PASS=true
+
+echo -e "\nValidating Javascript\n"
+
+# Check for eslint
+if [[ ! -x "$ESLINT" ]]; then
+  echo "\t\033[41mPlease install ESlint\033[0m (npm i --save-dev eslint)"
+  exit 1
+fi
+
+for FILE in $STAGED_FILES
+do
+  "$ESLINT" -o /dev/null "$FILE"
+
+  if [[ "$?" == 0 ]]; then
+    echo -e "\t${GREEN}ESLint Passed: $FILE ${NC}"
+  else
+    echo -e "\t${RED}ESLint Failed: $FILE ${NC}"
+    PASS=false
+  fi
+done
+
+
+# Bundle size check
+
+echo -e  "\nBundle file size check\n"
+
+for FILE in $STAGED_FILES
+do
+  if [[ "$FILE" =~ "web_app_bundle.js" ]]; then
+    APP_SIZE=$(ls -lS $FILE | awk '{print $5}')
+
+    if [ $APP_SIZE -gt "2900000" ]; then
+        echo -e "${RED}WARNING:${NC} The size of web_app_bundle.js exceeds the expected maximum limit. Please check if you have accidentally include 3rd party library\n"
+        echo -e "\t${RED}web_app_bundle.js: $APP_SIZE ${NC}"
+        PASS=false
+    else
+        echo -e "\t${GREEN}web_app_bundle.js: $APP_SIZE ${NC}"
+    fi
+  fi
+done
+
+if ! $PASS; then
+  echo -e "\n${RED}Commit aborted due to failing check${NC}\n"
+  exit 1
+else
+  echo -e "\n${GREEN}All checks passed${NC}\n"
+  exit 0
+fi
+
+exit $?
