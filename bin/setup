@@ -4,7 +4,10 @@ set -x #echo on
 cd ~/todoist/Todoist
 
 tmux new-session -s todoist -n vim -d
-tmux send-keys -t todoist:1  'cd ~/todoist/Todoist'  C-m
+tmux send-keys -t todoist:1  'cd ~/todoist/Todoist/todoist/static/apps.web'  C-m
+
+tmux new-window -n vim -t todoist
+tmux send-keys -t todoist:2  'cd ~/todoist/Todoist'  C-m
 
 tmux new-window -n console -t todoist
 tmux send-keys -t todoist:2  'cd ~/todoist/Todoist'  C-m
