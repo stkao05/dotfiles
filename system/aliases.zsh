@@ -10,3 +10,5 @@ then
 fi
 
 alias ia="open $1 -a /Applications/iA\ Writer.app"
+alias vim="nvim"
+alias vi="nvim"

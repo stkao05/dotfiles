@@ -1,33 +1,19 @@
 #!/bin/bash
 set -x #echo on
 
-cd ~/todoist/Todoist
+# absolute path is need here for 'cd' command below (i.e. cannot use "~/todoist")
+TODOIST_WEB_HOME="/Users/stevenkao/workspace/todoist-web"
 
-tmux new-session -s todoist -n vim -d
-tmux send-keys -t todoist:1  'cd ~/todoist/Todoist/todoist/static/apps.web'  C-m
-
-tmux new-window -n vim -t todoist
-tmux send-keys -t todoist:2  'cd ~/todoist/Todoist'  C-m
-
-tmux new-window -n console -t todoist
-tmux send-keys -t todoist:2  'cd ~/todoist/Todoist'  C-m
-
-tmux new-window -n docker -t todoist
-tmux send-keys -t todoist:3  'cd ~/todoist/Todoist'  C-m
-tmux send-keys -t todoist:3  'docker-compose up -d; tmux wait-for -S docker-up' C-m\; wait-for docker-up
-tmux send-keys -t todoist:3  'docker-compose exec todoist bash' C-m
-sleep 5
-tmux send-keys -t todoist:3  'cd ~/todoist'  C-m
+cd $TODOIST_WEB_HOME
 sleep 2
-tmux send-keys -t todoist:3  'python scripts/launch_server.py'  C-m
 
-tmux split-window -h -t todoist:3
-tmux send-keys -t todoist:3.2  'cd ~/todoist/Todoist'  C-m
-tmux send-keys -t todoist:3.2  'docker-compose exec todoist bash' C-m
-sleep 5
-tmux send-keys -t todoist:3.2  'cd ~/todoist'  C-m
-sleep 2
-tmux send-keys -t todoist:3.2  'python todoist/workers/processor.py'  C-m
+# vim window
+tmux new-session -s todoist-web -n vim -d
 
-tmux select-window -t todoist:2
-tmux attach -t todoist
+# second window for Todoist
+tmux new-window -n console -t todoist-web:2
+tmux split-window -h -t todoist-web:2
+tmux send-keys -t todoist-web:2.2  "npm run start:staging"  C-m
+
+tmux select-window -t todoist-web:2
+tmux attach -t todoist-web

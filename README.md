@@ -1,7 +1,5 @@
 ## install
 
-Run this:
-
 ```sh
 git clone https://github.com/stkao05/dotfiles ~/.dotfiles
 cd ~/.dotfiles
@@ -36,5 +34,18 @@ There's a few special files in the hierarchy.
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
-## Fork from
+
+## tmux cap key setup
+
+On many keyboards, the CAPS LOCK key sits right next to the a key on the home row of the keyboard. By remapping this key
+to CTRL , you can make triggering commands more comfortable.
+
+On your Mac, you can remap the CAPS LOCK key under the Keyboard preference pane, under System Preferences. Just press
+the Modifier Keys button and change the action for CAPS LOCK to “Control.”
+
+
+
+
+## Credit
 https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/
+

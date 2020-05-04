@@ -1,0 +1,55 @@
+#!/bin/bash
+set -x #echo on
+
+# absolute path is need here for 'cd' command below (i.e. cannot use "~/todoist")
+TODOIST_HOME="/Users/stevenkao/workspace/Todoist"
+
+cd $TODOIST_HOME
+sleep 2
+
+# vim window
+tmux new-session -s todoist -n web -d
+tmux send-keys -t todoist:1  "cd $TODOIST_HOME/todoist/static/apps.web"  C-m
+
+# second window for Todoist
+tmux new-window -n todoist -t todoist:2
+tmux send-keys -t todoist:2  "cd $TODOIST_HOME"  C-m
+
+# console window
+tmux new-window -n console -t todoist:3
+tmux send-keys -t todoist:3  "cd $TODOIST_HOME"  C-m
+tmux split-window -h -t todoist:3
+tmux send-keys -t todoist:3.2  "cd $TODOIST_HOME/todoist/static/apps.web"  C-m
+tmux send-keys -t todoist:3.2  "npm run watch"  C-m
+# tmux resize-pane -R -x 60 -t todoist:3.2
+
+## docker window
+tmux new-window -n docker -t todoist:4
+tmux send-keys -t todoist:4  "cd $TODOIST_HOME"  C-m
+tmux send-keys -t todoist:4  "docker-compose up -d; tmux wait-for -S docker-up" C-m\; wait-for docker-up
+tmux send-keys -t todoist:4  "docker-compose exec todoist bash" C-m
+sleep 2
+tmux send-keys -t todoist:4  "cd ~/todoist"  C-m
+sleep 2
+tmux send-keys -t todoist:4  "python scripts/launch_server.py"  C-m
+
+# docker window: split screen for running worker
+tmux split-window -h -t todoist:4
+tmux send-keys -t todoist:4.2  "cd $TODOIST_HOME"  C-m
+tmux send-keys -t todoist:4.2  "docker-compose exec todoist bash" C-m
+sleep 2
+tmux send-keys -t todoist:4.2  "cd ~/todoist"  C-m
+sleep 2
+tmux send-keys -t todoist:4.2  "./devenv/scripts/sqs_workers.sh"  C-m
+
+# docker window: another split window for running sqs worker
+tmux split-window -v -t todoist:4.2
+tmux send-keys -t todoist:4.2  "cd $TODOIST_HOME"  C-m
+tmux send-keys -t todoist:4.2  "docker-compose exec todoist bash" C-m
+sleep 2
+tmux send-keys -t todoist:4.2  "cd ~/todoist"  C-m
+sleep 2
+tmux send-keys -t todoist:4.2  "./devenv/scripts/workers.sh"  C-m
+
+tmux select-window -t todoist:3
+tmux attach -t todoist
