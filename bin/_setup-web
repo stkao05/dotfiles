@@ -1,0 +1,20 @@
+#!/bin/bash
+set -x #echo on
+
+# absolute path is need here for 'cd' command below (i.e. cannot use "~/todoist")
+TODOIST_WEB_HOME="/Users/stevenkao/workspace/todoist-web"
+
+cd $TODOIST_WEB_HOME
+sleep 2
+
+# vim window
+tmux new-session -s todoist-web -n vim -d
+
+# console window
+tmux new-window -n dev -t todoist-web:2
+
+# second window for Todoist
+tmux new-window -n console -t todoist-web:3
+
+tmux select-window -t todoist-web:3
+tmux attach -t todoist-web

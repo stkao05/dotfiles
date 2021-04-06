@@ -2,18 +2,15 @@
 set -x #echo on
 
 # absolute path is need here for 'cd' command below (i.e. cannot use "~/todoist")
-TODOIST_WEB_HOME="/Users/stevenkao/workspace/todoist-web"
+COIN_HOME="/Users/stevenkao/workspace/coin"
 
-cd $TODOIST_WEB_HOME
-sleep 2
+cd $COIN_HOME
 
-# vim window
-tmux new-session -s todoist-web -n vim -d
+tmux new-session -s coin -n vim -d
+tmux new-window -n dev -t coin:2
+tmux new-window -n console -t coin:3
 
-# second window for Todoist
-tmux new-window -n console -t todoist-web:2
-tmux split-window -h -t todoist-web:2
-tmux send-keys -t todoist-web:2.2  "npm run start:staging"  C-m
+tmux send-keys -t coin:2  "npm run dev"  C-m
 
-tmux select-window -t todoist-web:2
-tmux attach -t todoist-web
+tmux select-window -t coin:3
+tmux attach -t coin

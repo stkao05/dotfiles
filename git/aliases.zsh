@@ -5,7 +5,7 @@
 #
 alias gs='git status' # upgrade your git if -sb breaks for you. it's fun.
 alias gp='git push origin HEAD'
-alias gc='git checkout '
+alias gc='git commit --no-verify '
 alias gp='git push --no-verify '
 
 #alias ga='git add '
