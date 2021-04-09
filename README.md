@@ -9,11 +9,16 @@ Edit `zsh/zshrc.symlink` to specify the DOTPATH of the .dotfiles dir
 export ZSH=<DOTPATH>
 ```
 
-Run bootstrap script
+Run bootstrap script to setup the shell environments
 ```
-cd <DOTPATH>
 script/bootstrap
 ```
+
+Run install script installing all things specified in `install.sh` (i.e. all apps from `/homebrew/install.sh`)
+```
+script/install
+```
+
 
 ## Components
 
@@ -38,5 +43,4 @@ There's a few special files in the hierarchy.
 On many keyboards, the CAPS LOCK key sits right next to the a key on the home row of the keyboard. By remapping this key
 to CTRL , you can make triggering commands more comfortable.
 
-On your Mac, you can remap the CAPS LOCK key under the Keyboard preference pane, under System Preferences. Just press
-the Modifier Keys button and change the action for CAPS LOCK to “Control.”
+System Preferences --> Keyboard --> Modifier Keys 
