@@ -9,6 +9,6 @@ then
   alias la='gls -A --color'
 fi
 
-alias ia="open $1 -a /Applications/iA\ Writer.app"
 alias vim="nvim"
-alias vi="nvim"
+alias key='ssh-add ~/.ssh/stevenkao_rsa'
+alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
