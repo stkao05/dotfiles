@@ -1,21 +1,24 @@
+# dotfile
+
+
 ## Setup
 
 ```sh
 git clone https://github.com/stkao05/dotfiles <DOTPATH>
 ```
 
-Edit `zsh/zshrc.symlink` to specify the DOTPATH of the .dotfiles dir
-```
+Edit `zsh/zshrc.symlink` to specify the the path of this dotfile (`<DOTPATH>`)
+```sh
 export ZSH=<DOTPATH>
 ```
 
 Run bootstrap script to setup the shell environments
-```
+```sh
 script/bootstrap
 ```
 
 Run install script installing all things specified in `install.sh` (i.e. all apps from `/homebrew/install.sh`)
-```
+```sh
 script/install
 ```
 
