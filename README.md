@@ -16,6 +16,11 @@ Run bootstrap script to setup the shell environments
 ```sh
 script/bootstrap
 ```
+The script does the following
+
+- Setup git config if no local git config is presented
+- Scan for all `*.symlink` and create symbolic links
+
 
 Run install script installing all things specified in `install.sh` (i.e. all apps from `/homebrew/install.sh`)
 ```sh
@@ -41,9 +46,20 @@ There's a few special files in the hierarchy.
   symlinked in when you run `script/bootstrap`.
 
 
+
 ## tmux cap key setup
 
 On many keyboards, the CAPS LOCK key sits right next to the a key on the home row of the keyboard. By remapping this key
 to CTRL , you can make triggering commands more comfortable.
 
 System Preferences --> Keyboard --> Modifier Keys 
+
+
+## git
+
+- `git/gitconfig.local.symlink`: contains config that might have private info (i.e. email). This file fille be ignored
+- `git/gitconfig.symlink`: will include config from `git/gitconfig.local.symlink` plus additional config. This is the final config file that will be used by git
+
+
+
+
